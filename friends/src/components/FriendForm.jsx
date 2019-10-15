@@ -20,7 +20,7 @@ export default function FriendForm(props) {
   
   const onFormSubmit = e => {
     e.preventDefault();
-    props.addFriend({...friendForm, id: uuid()})
+    props.addFriend({...friendForm, id: Date.now()})
     setFriendForm(initialFriendForm);
   }
   
