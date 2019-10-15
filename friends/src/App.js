@@ -1,26 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, NavLink, withRouter, Redirect } from 'react-router-dom';
+import Login from './components/Login';
+import FriendsList from './components/FriendsList';
 
-function App() {
+// Make it so `Container` gets the 'magic' props from React Router
+export function Container(props) {
+  const onLogout = () => {
+    localStorage.clear();
+    props.history.replace('/');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className='container'>
+      <nav>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <NavLink exact to='/'>Login</NavLink><br />
+          <NavLink to='/FriendsList'>Friends List</NavLink><br />
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+        <button onClick={onLogout}>Logout</button>
+      </nav>
+
+      <main>
+        <Route
+          exact
+          path='/'
+          component={Login}
+        />
+        
+        <Route
+          exact
+          path='/FriendsList'
+          // render={props => withAthCheck(Quotes, props)}
+          component={FriendsList}
+        />
+      </main>
     </div>
   );
 }
 
-export default App;
+function withAthCheck(Component, props) {
+  if (localStorage.getItem('token')) {
+    return <Component {...props} />
+  }
+  return <Redirect to='/' />;
+}
+
+export default withRouter(Container);
