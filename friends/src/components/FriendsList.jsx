@@ -9,11 +9,6 @@ export function FriendsList(props) {
     props.getFriends();
   }, []);
 
-  const deleteFriend = id => {
-    
-
-  }
-
   return (
     <div className="allFriends">
       <h2>All Friends</h2>
@@ -26,7 +21,7 @@ export function FriendsList(props) {
           <p>{friend.email}</p>
           <button>edit</button>
           {/* <button onClick={() => deleteFriend(friend.id)} >Delete</button> */}
-          <button>Delete</button>
+          <button onClick={() => props.deleteFriend(friend.id)} >Delete</button>
         </div>
       ))}
     </div>
@@ -37,28 +32,3 @@ export default connect(
   state => state,
   actionCreators
 )(FriendsList);
-
-// const deleteFriend = (id) => {
-//   withAuth()
-//     .delete(`http://localhost:5001/api/friends/${id}`)
-//     .then(res => {
-//       console.log(res.data);
-//       // setFriends(res.data);
-//     })
-//     .catch(error => {
-//       alert(error.response.data.error);
-//     });
-// }
-
-// const addFriend = newFriend => {
-//   withAuth()
-//     .post("http://localhost:5001/api/friends", newFriend)
-//     .then(res => {
-//       console.log(res.data);
-//       // setFriends(res.data);
-//     })
-//     .catch(error => {
-//       // props.history.push('/'); // could be improved
-//       alert(error.response.data.error);
-//     });
-// };
