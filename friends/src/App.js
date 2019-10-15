@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, NavLink, withRouter, Redirect } from 'react-router-dom';
+import { Route, NavLink, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import FriendsList from './components/FriendsList';
 import FriendForm from './components/FriendForm';

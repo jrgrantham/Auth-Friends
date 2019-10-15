@@ -1,7 +1,7 @@
 import * as actionTypes from './actionTypes';
 
 const allFriends = [];
-const bestFriends = [];
+// const bestFriends = [];
 const friendForm = {
   name: "",
   age: "",

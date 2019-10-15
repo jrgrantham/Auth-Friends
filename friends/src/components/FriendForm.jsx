@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import * as actionCreators from '../state/actionCreators';
 
@@ -18,8 +18,7 @@ export function FriendForm({ formValues, changeInput, addNewFriend }) {
     });
   };
 
-
-  const isDisabled = () => !formValues.name || !formValues.age || !formValues.email;
+  // const isDisabled = () => !formValues.name || !formValues.age || !formValues.email;
   
   return (
     <form className='component' onSubmit={onFormSubmit}>
@@ -44,7 +43,7 @@ export function FriendForm({ formValues, changeInput, addNewFriend }) {
           name='email' />
       </label><br />
 
-      <button disabled={isDisabled} >Submit</button>
+      <button>Add Friend</button>
     </form>
   );
 }

@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
-import FriendForm from "./FriendForm";
 import { connect } from "react-redux";
 import * as actionCreators from "../state/actionCreators";
 
 export function FriendsList(props) {
   console.log(props);
+
   useEffect(() => {
     props.getFriends();
   }, []);
 
-  console.log(props.friends);
+  const deleteFriend = id => {
+    
+
+  }
 
   return (
     <div className="allFriends">
