@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, NavLink, withRouter, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import FriendsList from './components/FriendsList';
+import FriendForm from './components/FriendForm';
 
 // Make it so `Container` gets the 'magic' props from React Router
 export function Container(props) {
@@ -27,12 +28,12 @@ export function Container(props) {
           path='/'
           component={Login}
         />
-        
+                
         <Route
           exact
           path='/FriendsList'
-          // render={props => withAthCheck(Quotes, props)}
-          component={FriendsList}
+          render={props => withAthCheck(FriendsList, props)}
+          // component={FriendsList}
         />
       </main>
     </div>

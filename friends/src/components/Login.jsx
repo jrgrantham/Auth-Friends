@@ -12,7 +12,7 @@ export default function Login(props) {
     })
       .then(res => {
         localStorage.setItem('token', res.data.payload)
-        props.history.push('/');
+        props.history.push('/FriendsList');
       })
       .catch(error => {
         alert(error.response.data.error);
