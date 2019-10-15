@@ -12,7 +12,7 @@ function Container(props) {
   };
 
   return (
-    <div className='container'>
+    <div className='App'>
       <nav>
         <p>
           <NavLink exact to='/'>Login</NavLink><br />
@@ -28,7 +28,7 @@ function Container(props) {
           path='/'
           component={Login}
         />
-
+        <FriendForm />
         <Route
           exact
           path='/FriendsList'

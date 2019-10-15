@@ -1,71 +1,61 @@
-import React, { useState, useEffect } from "react";
-import withAuth from "../axios";
+import React, { useEffect } from "react";
 import FriendForm from "./FriendForm";
 import { connect } from "react-redux";
-import * as actionCreators from '../state/actionCreators';
+import * as actionCreators from "../state/actionCreators";
 
 export function FriendsList(props) {
-  const [friends, setFriends] = useState([]);
-
+  console.log(props);
   useEffect(() => {
-    withAuth()
-      .get("http://localhost:5001/api/friends")
-      .then(res => {
-        console.log(res.data);
-        setFriends(res.data);
-      })
-      .catch(error => {
-        // props.history.push('/'); // could be improved
-        // alert(error.response.data.error);
-      });
+    props.getFriends();
   }, []);
 
-  const addFriend = newFriend => {
-    withAuth()
-      .post("http://localhost:5001/api/friends", newFriend)
-      .then(res => {
-        console.log(res.data);
-        setFriends(res.data);
-      })
-      .catch(error => {
-        // props.history.push('/'); // could be improved
-        alert(error.response.data.error);
-      });
-  };
-
-  const deleteFriend = (id) => {
-    withAuth()
-      .delete(`http://localhost:5001/api/friends/${id}`)
-      .then(res => {
-        console.log(res.data);
-        setFriends(res.data);
-      })
-      .catch(error => {
-        alert(error.response.data.error);
-      });
-  }
-
-  const editFriend = (friend) => {
-
-  }
+  console.log(props.friends);
 
   return (
-    <div>
-      <FriendForm addFriend={addFriend}/>
-      <div className="quotes">
-        {friends.map(friend => (
-          <li key={friend.id}>
-            {friend.name} {friend.age} {friend.email}
-            <button>edit</button>
-            <button onClick={() => deleteFriend(friend.id)} >Delete</button>
-          </li>
-        ))}
-      </div>
+    <div className="allFriends">
+      <h2>All Friends</h2>
+      {props.friends.map(friend => (
+        <div key={friend.id} className='friendCard'>
+          <h5>
+            {friend.name}
+          </h5>
+          <p>{friend.age}</p>
+          <p>{friend.email}</p>
+          <button>edit</button>
+          {/* <button onClick={() => deleteFriend(friend.id)} >Delete</button> */}
+          <button>Delete</button>
+        </div>
+      ))}
     </div>
   );
 }
 
 export default connect(
   state => state,
-  actionCreators,
+  actionCreators
 )(FriendsList);
+
+// const deleteFriend = (id) => {
+//   withAuth()
+//     .delete(`http://localhost:5001/api/friends/${id}`)
+//     .then(res => {
+//       console.log(res.data);
+//       // setFriends(res.data);
+//     })
+//     .catch(error => {
+//       alert(error.response.data.error);
+//     });
+// }
+
+// const addFriend = newFriend => {
+//   withAuth()
+//     .post("http://localhost:5001/api/friends", newFriend)
+//     .then(res => {
+//       console.log(res.data);
+//       // setFriends(res.data);
+//     })
+//     .catch(error => {
+//       // props.history.push('/'); // could be improved
+//       alert(error.response.data.error);
+//     });
+// };

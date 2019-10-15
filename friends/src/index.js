@@ -8,10 +8,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { allFriendsReducer } from "./state/reducers";
+import { allFriendsReducer, friendFormReducer } from "./state/reducers";
 
 const monsterReducer = combineReducers({
-  Friends: allFriendsReducer
+  friends: allFriendsReducer,
+  formValues: friendFormReducer,
 });
 
 const store = createStore(

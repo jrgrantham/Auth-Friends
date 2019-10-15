@@ -1,64 +1,55 @@
-import React, { useState, useEffect } from "react";
-import uuid from "uuid";
+import React, { useState } from "react";
+import { connect } from 'react-redux';
+import * as actionCreators from '../state/actionCreators';
 
-const initialFriendForm = {
-  name: "",
-  age: "",
-  email: ""
-};
-
-export default function FriendForm(props) {
+export function FriendForm({ formValues, changeInput, addNewFriend }) {
   
-  const [friendForm, setFriendForm] = useState(initialFriendForm);
-  
-  const onChange = e => {
-    setFriendForm({ 
-      ...friendForm, 
-      [e.target.name]: e.target.value
-    });
+  const onValueChange = event => {
+    changeInput(event.target);
   };
   
-  const onFormSubmit = e => {
-    e.preventDefault();
-    props.addFriend({...friendForm, id: Date.now()})
-    setFriendForm(initialFriendForm);
-  }
+  const onFormSubmit = event => {
+    event.preventDefault();
+    addNewFriend({
+      id: Date.now(),
+      name: formValues.name,
+      age: formValues.age,
+      email: formValues.email
+    });
+  };
 
-  const isDisabled = () => !friendForm.name || !friendForm.age || !friendForm.email;
+
+  const isDisabled = () => !formValues.name || !formValues.age || !formValues.email;
   
   return (
-    <form>
-      <label htmlFor="nameInput">Name</label>
-      <input
-        name="name"
-        value={friendForm.name}
-        onChange={onChange}
-        id="nameInput"
-        type="text"
-      />
-      <br />
-      <label htmlFor="ageInput">Age</label>
-      <input
-        name="age"
-        value={friendForm.age}
-        onChange={onChange}
-        id="ageInput"
-        type="number"
-      />
-      <br />
-      <label htmlFor="ageInput">Email</label>
-      <input
-        name="email"
-        value={friendForm.email}
-        onChange={onChange}
-        id="ageInput"
-        type="text"
-      />
-      <br />
+    <form className='component' onSubmit={onFormSubmit}>
+      <label>Name
+        <input 
+          value={formValues.name}
+          onChange={onValueChange}
+          name='name' />
+      </label><br />
 
-      <button disabled={isDisabled()} onClick={onFormSubmit}>
-        submit
-      </button>
+      <label>Age
+        <input
+          value={formValues.age}
+          onChange={onValueChange}
+          name='age' />
+      </label><br />
+
+      <label>Email
+        <input
+          value={formValues.email}
+          onChange={onValueChange}
+          name='email' />
+      </label><br />
+
+      <button disabled={isDisabled} >Submit</button>
     </form>
   );
 }
+
+export default connect(
+  state => state,
+  actionCreators,
+)(FriendForm);
