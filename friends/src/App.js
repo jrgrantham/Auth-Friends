@@ -1,37 +1,31 @@
 import React from 'react';
-import { Route, NavLink, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import FriendsList from './components/FriendsList';
 import FriendForm from './components/FriendForm';
 import { connect } from 'react-redux';
+import "./App.css";
+import NavBar from './components/NavBar';
 
-function Container(props) {
-  const onLogout = () => {
-    localStorage.clear();
-    props.history.replace('/');
-  };
+
+function Container() {
 
   return (
     <div className='App'>
-      <nav>
-        <p>
-          <NavLink exact to='/'>Login</NavLink><br />
-          <NavLink to='/FriendsList'>Friends List</NavLink><br />
-        </p>
-
-        <button onClick={onLogout}>Logout</button>
-      </nav>
+      <NavBar />
 
       <main>
         <Route
-          exact
-          path='/'
+          exact path='/'
           component={Login}
         />
-        <FriendForm />
         <Route
-          exact
-          path='/FriendsList'
+          path='/AddFriend'
+          render={props => withAthCheck(FriendForm, props)}
+          // component={FriendForm}
+        />
+        <Route
+          exact path='/FriendsList'
           render={props => withAthCheck(FriendsList, props)}
           // component={FriendsList}
         />

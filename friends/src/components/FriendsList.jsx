@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../state/actionCreators";
+import { Redirect } from 'react-router-dom';
+
+export const editFriend = friend => {
+  console.log(friend);
+  return <Redirect to='/AddFriend' friend={friend} />
+}
 
 export function FriendsList(props) {
   console.log(props);
@@ -19,8 +25,7 @@ export function FriendsList(props) {
           </h5>
           <p>{friend.age}</p>
           <p>{friend.email}</p>
-          <button>edit</button>
-          {/* <button onClick={() => deleteFriend(friend.id)} >Delete</button> */}
+          <button onClick={() => editFriend(friend)} >edit</button>
           <button onClick={() => props.deleteFriend(friend.id)} >Delete</button>
         </div>
       ))}

@@ -2,7 +2,18 @@
   text-align: center;
 }
 
+.app {
+  width: 80%;
+}
+
+nav {
+  display: flex;
+
+}
+
 .friendCard {
-  background-color: blue;
+  margin: 20px;
+  padding: 20px;
+  width: 250px;
   border: 1px solid red;
 }
