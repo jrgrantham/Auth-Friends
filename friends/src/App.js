@@ -3,9 +3,9 @@ import { Route, NavLink, withRouter, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import FriendsList from './components/FriendsList';
 import FriendForm from './components/FriendForm';
+import { connect } from 'react-redux';
 
-// Make it so `Container` gets the 'magic' props from React Router
-export function Container(props) {
+function Container(props) {
   const onLogout = () => {
     localStorage.clear();
     props.history.replace('/');
@@ -28,7 +28,7 @@ export function Container(props) {
           path='/'
           component={Login}
         />
-                
+
         <Route
           exact
           path='/FriendsList'
@@ -47,4 +47,7 @@ function withAthCheck(Component, props) {
   return <Redirect to='/' />;
 }
 
-export default withRouter(Container);
+export default connect(
+  state => state,
+  {}
+)(Container);

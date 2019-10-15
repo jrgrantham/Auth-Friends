@@ -23,13 +23,8 @@ export default function FriendForm(props) {
     props.addFriend({...friendForm, id: Date.now()})
     setFriendForm(initialFriendForm);
   }
-  
-  const isDisabled = () => {
-    if (!friendForm.name || !friendForm.age || !friendForm.email) {
-      return true;
-    }
-    return false;
-  };
+
+  const isDisabled = () => !friendForm.name || !friendForm.age || !friendForm.email;
   
   return (
     <form>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import withAuth from "../axios";
 import FriendForm from "./FriendForm";
+import { connect } from "react-redux";
+import * as actionCreators from '../state/actionCreators';
 
-export default function FriendsList(props) {
+export function FriendsList(props) {
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
@@ -14,7 +16,7 @@ export default function FriendsList(props) {
       })
       .catch(error => {
         // props.history.push('/'); // could be improved
-        alert(error.response.data.error);
+        // alert(error.response.data.error);
       });
   }, []);
 
@@ -39,23 +41,13 @@ export default function FriendsList(props) {
         setFriends(res.data);
       })
       .catch(error => {
-        // props.history.push('/'); // could be improved
         alert(error.response.data.error);
       });
   }
 
-  // const replaceFriend = (friend) => {
-  //   withAuth()
-  //   .put(`http://localhost:5001/api/friends/${friend.id}`, friend)
-  //   .then(res => {
-  //     console.log(res.data);
-  //     setFriends(res.data);
-  //   })
-  //   .catch(error => {
-  //     // props.history.push('/'); // could be improved
-  //     alert(error.response.data.error);
-  //   });
-  // }
+  const editFriend = (friend) => {
+
+  }
 
   return (
     <div>
@@ -72,3 +64,8 @@ export default function FriendsList(props) {
     </div>
   );
 }
+
+export default connect(
+  state => state,
+  actionCreators,
+)(FriendsList);

@@ -1,15 +1,33 @@
 import React from "react";
+import { Provider } from "react-redux";
+import { combineReducers, createStore, compose, applyMiddleware } from "redux";
 import ReactDOM from "react-dom";
+import thunk from "redux-thunk";
 import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { allFriendsReducer } from "./state/reducers";
+
+const monsterReducer = combineReducers({
+  Friends: allFriendsReducer
+});
+
+const store = createStore(
+  monsterReducer,
+  compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
 
